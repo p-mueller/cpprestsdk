@@ -18,6 +18,7 @@
 
 #include "../../http/common/x509_cert_utilities.h"
 #include "pplx/threadpool.h"
+#include <boost/lexical_cast.hpp>
 
 #include "ws_client_impl.h"
 
@@ -103,7 +104,7 @@ static std::string build_error_msg(const std::error_code &ec, const std::string 
 {
     std::string result = location;
     result += ": ";
-    result += std::to_string(ec.value());
+    result += boost::lexical_cast<std::string>(ec.value());
     result += ": ";
     result += ec.message();
     return result;
