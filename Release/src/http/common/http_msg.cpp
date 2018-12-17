@@ -12,6 +12,7 @@
 ****/
 #include "stdafx.h"
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include "../common/internal_http_helpers.h"
 #include "cpprest/producerconsumerstream.h"
 
@@ -276,9 +277,9 @@ std::string http_version::to_utf8string() const
     std::string ret;
     ret.reserve(8);
     ret.append("HTTP/");
-    ret.append(std::to_string(static_cast<unsigned int>(major)));
+    ret.append(boost::lexical_cast<std::string>(static_cast<unsigned int>(major)));
     ret.append(".");
-    ret.append(std::to_string(static_cast<unsigned int>(minor)));
+    ret.append(boost::lexical_cast<std::string>(static_cast<unsigned int>(minor)));
     return ret;
 }
 
