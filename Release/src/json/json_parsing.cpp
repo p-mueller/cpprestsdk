@@ -13,6 +13,7 @@
 
 #include "stdafx.h"
 #include <cstdlib>
+#include <boost/lexical_cast.hpp>
 
 #if defined(_MSC_VER)
 #pragma warning(disable : 4127) // allow expressions like while(true) pass
@@ -50,9 +51,9 @@ template <typename Token>
 void CreateException(const Token &tk, const utility::string_t &message)
 {
     std::string str("* Line ");
-    str += std::to_string(tk.start.m_line);
+    str += boost::lexical_cast<std::string>(tk.start.m_line);
     str += ", Column ";
-    str += std::to_string(tk.start.m_column);
+    str += boost::lexical_cast<std::string>(tk.start.m_column);
     str += " Syntax error: ";
     str += utility::conversions::to_utf8string(message);
     throw web::json::json_exception(std::move(str));
