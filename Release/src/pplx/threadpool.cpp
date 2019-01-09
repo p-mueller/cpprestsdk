@@ -78,7 +78,7 @@ private:
     }
 
 #if defined(__ANDROID__)
-    static void detach_from_java(void*) { JVM.load()->DetachCurrentThread(); }
+    static void detach_from_java(void*) { crossplat::JVM.load()->DetachCurrentThread(); }
 #endif // __ANDROID__
 
     static void* thread_start(void* arg) CPPREST_NOEXCEPT
@@ -193,7 +193,7 @@ void threadpool::initialize_with_threads(size_t num_threads)
 }
 
 #if defined(__ANDROID__)
-void cpprest_init(JavaVM* vm) { JVM = vm; }
+void cpprest_init(JavaVM* vm) { crossplat::JVM = vm; }
 #endif
 
 std::unique_ptr<crossplat::threadpool> crossplat::threadpool::construct(size_t num_threads)
