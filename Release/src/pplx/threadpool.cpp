@@ -18,7 +18,7 @@
 #include <jni.h>
 #endif
 
-namespace
+namespace crossplat
 {
 #if defined(__ANDROID__)
 // This pointer will be 0-initialized by default (at load time).
@@ -85,7 +85,7 @@ private:
     {
 #if defined(__ANDROID__)
         // Calling get_jvm_env() here forces the thread to be attached.
-        get_jvm_env();
+        crossplat::get_jvm_env();
         pthread_cleanup_push(detach_from_java, nullptr);
 #endif // __ANDROID__
         threadpool_impl* _this = reinterpret_cast<threadpool_impl*>(arg);
